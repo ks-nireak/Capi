@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_23_090337) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_12_14_091335) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,21 +21,21 @@ ActiveRecord::Schema.define(version: 2021_09_23_090337) do
     t.integer "code_length"
     t.integer "code_count"
     t.string "charset"
-    t.datetime "started_at"
-    t.datetime "ended_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "started_at", precision: nil
+    t.datetime "ended_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "coupons", force: :cascade do |t|
     t.string "coupon_code"
     t.string "coupon_type"
     t.float "value"
-    t.datetime "published_at"
-    t.datetime "valid_until"
+    t.datetime "published_at", precision: nil
+    t.datetime "valid_until", precision: nil
     t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "campaign_id"
     t.index ["campaign_id"], name: "index_coupons_on_campaign_id"
   end
@@ -47,30 +46,30 @@ ActiveRecord::Schema.define(version: 2021_09_23_090337) do
     t.string "email"
     t.string "phone"
     t.string "source_uid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.float "price"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "metadata", force: :cascade do |t|
     t.string "key"
     t.string "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_items", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.bigint "order_id", null: false
     t.string "quantity"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_order_items_on_item_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
@@ -78,8 +77,8 @@ ActiveRecord::Schema.define(version: 2021_09_23_090337) do
   create_table "order_metadata", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.bigint "metadata_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["metadata_id"], name: "index_order_metadata_on_metadata_id"
     t.index ["order_id"], name: "index_order_metadata_on_order_id"
   end
@@ -89,16 +88,16 @@ ActiveRecord::Schema.define(version: 2021_09_23_090337) do
     t.bigint "customer_id", null: false
     t.float "amount"
     t.string "source_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "redemptions", force: :cascade do |t|
     t.bigint "coupon_id", null: false
     t.bigint "customer_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.float "amount"
     t.string "status"
     t.jsonb "metadata"
@@ -112,10 +111,10 @@ ActiveRecord::Schema.define(version: 2021_09_23_090337) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -125,8 +124,8 @@ ActiveRecord::Schema.define(version: 2021_09_23_090337) do
     t.integer "limitation_count"
     t.jsonb "rules"
     t.bigint "coupon_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["coupon_id"], name: "index_validation_rules_on_coupon_id"
   end
 
